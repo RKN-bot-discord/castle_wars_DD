@@ -241,18 +241,21 @@ public class CastleRooms {
 
         @Override
         public boolean canBuy(PlayerData data) {
-            System.out.println(data.team().getUnitCountAttack()<Vars.state.rules.unitCap/2);
-            System.out.println(data.team().getUnitCountDefense()<Vars.state.rules.unitCap/2);
             if (!super.canBuy(data)) return false;
             if (attack){
-                if(data.team().getUnitCountAttack()<Vars.state.rules.unitCap/2) return true;
-                }
-            else{if(data.team().getUnitCountDefense()<Vars.state.rules.unitCap/2) return true;}
+                if(data.team().getUnitCountAttack()>=Vars.state.rules.unitCap/2) {
+                Bundle.announce(data.player, "rooms.unit.limit");
+                return false;
+                }}
+            else{
+                if(data.team().getUnitCountDefense()>=Vars.state.rules.unitCap/2){ 
+                Bundle.announce(data.player, "rooms.unit.limit");
+                return false;
+                }}
             if (data.team().getUnitCount() >= Vars.state.rules.unitCap) {
                 Bundle.announce(data.player, "rooms.unit.limit");
                 return false;
             }
-
             return true;
         }
 
