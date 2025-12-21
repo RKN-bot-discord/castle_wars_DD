@@ -30,19 +30,19 @@ public class TeamData {
 
     public int getUnitCountAttack(){
         if (team == Team.sharded){
-            return team.data().units.count(unit -> !unit.spawnedByCore() && unit.type().useUnitCap && unit.y/8>Vars.world.height()/8);
+            return team.data().units.count(unit -> !unit.spawnedByCore() && unit.type().useUnitCap && unit.y/8>Vars.world.height()/2);
         }
         else{
-            return team.data().units.count(unit -> !unit.spawnedByCore() && unit.type().useUnitCap && unit.y/8<Vars.world.height()/8);
+            return team.data().units.count(unit -> !unit.spawnedByCore() && unit.type().useUnitCap && unit.y/8<Vars.world.height()/2);
         }
     }
 
     public int getUnitCountDefense(){
         if (team == Team.blue){
-            return team.data().units.count(unit -> !unit.spawnedByCore() && unit.type().useUnitCap && unit.y/8>Vars.world.height()/8);
+            return team.data().units.count(unit -> !unit.spawnedByCore() && unit.type().useUnitCap && unit.y/8>Vars.world.height()/2);
         }
         else{
-            return team.data().units.count(unit -> !unit.spawnedByCore() && unit.type().useUnitCap && unit.y/8<Vars.world.height()/8);
+            return team.data().units.count(unit -> !unit.spawnedByCore() && unit.type().useUnitCap && unit.y/8<Vars.world.height()/2);
         }
     }
 

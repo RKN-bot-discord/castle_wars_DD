@@ -28,9 +28,11 @@ public class PlayerData {
         if (player.con.isConnected()) Bundle.setHud(player, "ui.hud",
                 money >= 0 ? "lime" : "scarlet", money,
                 income >= 0 ? "lime" : "scarlet", income,
-                team().getUnitCount() < state.rules.unitCap ? "lightgray" : "scarlet",
+                team().getUnitCount() > state.rules.unitCap ? "lightgray" : "scarlet",
                 team().getUnitCount(), state.rules.unitCap, UI.formatTime(timer * 60f),
+                team().getUnitCountAttack(),
                 team().getUnitCountAttack() < state.rules.unitCap/2 ? "lightgray" : "scarlet",
+                team().getUnitCountDefense(),
                 team().getUnitCountDefense() < state.rules.unitCap/2 ? "lightgray" : "scarlet");
     }
 

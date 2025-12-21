@@ -188,7 +188,6 @@ public class CastleRooms {
         private boolean validFor(UnitType type, int x,int y) {
 
             var tile = world.tile(x, y);
-            System.out.println(!tile.floor().isLiquid);
             if (tile == null)
                 return false;
             // TODO: Check if tile is in death zone.
@@ -230,11 +229,11 @@ public class CastleRooms {
                 var i = 0;
                 Vars.state.rules.unitCap = Integer.MAX_VALUE;
                 var y_coordinate = core.y + Mathf.range(48f);
-                while(i < 10 && !validFor(type,Math.round((int)(core.x + 48f)),Math.round((int)y_coordinate/8))){
+                while(i < 10 && !validFor(type,Math.round((int)(core.x + 48f)/8),Math.round((int)y_coordinate/8))){
                         y_coordinate = core.y + Mathf.range(48f);
                         i++;
                 }
-                unit = type.spawn(data.player.team(), Math.round(core.x + 48f)*8f, Math.round(y_coordinate));
+                unit = type.spawn(data.player.team(), Math.round(core.x + 48f), Math.round(y_coordinate));
                 Bundle.label(1f, unit.getX(), unit.getY(), "rooms.unit.bought", data.player.coloredName());
                 Vars.state.rules.unitCap = prevLimit;
             };
@@ -242,8 +241,13 @@ public class CastleRooms {
 
         @Override
         public boolean canBuy(PlayerData data) {
+            System.out.println(data.team().getUnitCountAttack()<Vars.state.rules.unitCap/2);
+            System.out.println(data.team().getUnitCountDefense()<Vars.state.rules.unitCap/2);
             if (!super.canBuy(data)) return false;
-
+            if (attack){
+                if(data.team().getUnitCountAttack()<Vars.state.rules.unitCap/2) return true;
+                }
+            else{if(data.team().getUnitCountDefense()<Vars.state.rules.unitCap/2) return true;}
             if (data.team().getUnitCount() >= Vars.state.rules.unitCap) {
                 Bundle.announce(data.player, "rooms.unit.limit");
                 return false;
