@@ -20,8 +20,14 @@ import useful.Bundle;
 import static mindustry.Vars.*;
 import static castle.CastleUtils.boatSpawnX;
 import static castle.CastleUtils.boatSpawnY;
+import static castle.CastleUtils.landSpawnX;
+import static castle.CastleUtils.landSpawnY;
+import static castle.CastleUtils.airSpawnX;
+import static castle.CastleUtils.airSpawnY;
 import static castle.CastleUtils.generatePlatforms;
 import static castle.CastleUtils.platformSource;
+import static castle.CastleUtils.DefenseCap;
+import static castle.CastleUtils.AttackCap;
 import static castle.Main.*;
 
 public class CastleRooms {
@@ -222,6 +228,38 @@ public class CastleRooms {
                 Bundle.label(1f, unit.getX(), unit.getY(), "rooms.unit.bought", data.player.coloredName());
                 Vars.state.rules.unitCap = prevLimit;
             }
+            else if ((landSpawnX > 0 && landSpawnY > 0) && !type.naval && !type.flying) {
+                var prevLimit = Vars.state.rules.unitCap;
+                Unit unit = null;
+                var i = 0;
+                Vars.state.rules.unitCap = Integer.MAX_VALUE;;
+                var y_coordinate = Math.round((data.team().team == Team.blue ? Vars.world.height() - landSpawnY : landSpawnY) * 8 + Mathf.range(48f));
+                while(i < 10 && !validFor(type,Math.round((int)landSpawnX),Math.round((int)y_coordinate/8))){
+                        y_coordinate = Math.round((data.team().team == Team.blue ? Vars.world.height() - landSpawnY : landSpawnY) * 8 + Mathf.range(48f));
+                        i++;
+                }
+                unit = type.spawn(
+                    data.player.team(),
+                    landSpawnX * 8f,Math.round(y_coordinate));
+                Bundle.label(1f, unit.getX(), unit.getY(), "rooms.unit.bought", data.player.coloredName());
+                Vars.state.rules.unitCap = prevLimit;
+            }
+            else if ((airSpawnX > 0 && airSpawnY > 0) && type.flying) {
+                var prevLimit = Vars.state.rules.unitCap;
+                Unit unit = null;
+                var i = 0;
+                Vars.state.rules.unitCap = Integer.MAX_VALUE;;
+                var y_coordinate = Math.round((data.team().team == Team.blue ? Vars.world.height() - airSpawnY : airSpawnY) * 8 + Mathf.range(48f));
+                while(i < 10 && !validFor(type,Math.round((int)airSpawnX),Math.round((int)y_coordinate/8))){
+                        y_coordinate = Math.round((data.team().team == Team.blue ? Vars.world.height() - airSpawnY : airSpawnY) * 8 + Mathf.range(48f));
+                        i++;
+                }
+                unit = type.spawn(
+                    data.player.team(),
+                    airSpawnX * 8f,Math.round(y_coordinate));
+                Bundle.label(1f, unit.getX(), unit.getY(), "rooms.unit.bought", data.player.coloredName());
+                Vars.state.rules.unitCap = prevLimit;
+            }
             else if (data.player.core() != null) {
                 var core = data.player.core();
                 var prevLimit = Vars.state.rules.unitCap;
@@ -243,12 +281,12 @@ public class CastleRooms {
         public boolean canBuy(PlayerData data) {
             if (!super.canBuy(data)) return false;
             if (attack){
-                if(data.team().getUnitCountAttack()>=Vars.state.rules.unitCap/2) {
+                if(data.team().getUnitCountAttack()>=AttackCap) {
                 Bundle.announce(data.player, "rooms.unit.limit");
                 return false;
                 }}
             else{
-                if(data.team().getUnitCountDefense()>=Vars.state.rules.unitCap/2){ 
+                if(data.team().getUnitCountDefense()>=DefenseCap) { 
                 Bundle.announce(data.player, "rooms.unit.limit");
                 return false;
                 }}

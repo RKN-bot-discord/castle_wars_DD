@@ -4,7 +4,8 @@ import arc.struct.Seq;
 import mindustry.core.UI;
 import mindustry.gen.Player;
 import useful.Bundle;
-
+import static castle.CastleUtils.DefenseCap;
+import static castle.CastleUtils.AttackCap;
 import static castle.Main.*;
 import static mindustry.Vars.*;
 
@@ -33,7 +34,8 @@ public class PlayerData {
                 team().getUnitCountAttack(),
                 team().getUnitCountAttack() < state.rules.unitCap/2 ? "lightgray" : "scarlet",
                 team().getUnitCountDefense(),
-                team().getUnitCountDefense() < state.rules.unitCap/2 ? "lightgray" : "scarlet");
+                team().getUnitCountDefense() < state.rules.unitCap/2 ? "lightgray" : "scarlet",
+            AttackCap,DefenseCap);
     }
 
     public void updateMoney() {
