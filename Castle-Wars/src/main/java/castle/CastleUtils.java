@@ -140,7 +140,7 @@ public class CastleUtils {
                         DefenseCap = Short.valueOf(args[1]);
                     } catch (Exception error) {
                         Log.warn("Failed to set Defense Cap!\n" + error);
-                        DefenseCap = 250;
+                        DefenseCap = 150;
                     }
                 }
                 if (flag.flag.startsWith("AttackCap")) {
@@ -149,7 +149,7 @@ public class CastleUtils {
                         AttackCap = Short.valueOf(args[1]);
                     } catch (Exception error) {
                         Log.warn("Failed to set Attack Cap!\n" + error);
-                        AttackCap = 250;
+                        AttackCap = 350;
                     }
                 }
             }
