@@ -29,6 +29,7 @@ import static castle.CastleUtils.platformSource;
 import static castle.CastleUtils.DefenseCap;
 import static castle.CastleUtils.AttackCap;
 import static castle.Main.*;
+import castle.ShopRule.*;
 
 public class CastleRooms {
     public static class Room {
@@ -210,7 +211,6 @@ public class CastleRooms {
         public void buy(PlayerData data) {
             super.buy(data);
             data.income += income;
-            System.out.println("Bue");
             if (attack) spawns.spawn(data.player, data.player.team(), type);
             else if ((boatSpawnX > 0 && boatSpawnY > 0) && type.naval) {
                 var prevLimit = Vars.state.rules.unitCap;

@@ -4,7 +4,6 @@ import arc.struct.OrderedMap;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.blocks.defense.turrets.Turret;
-import castle.ShopRule.*;
 public class CastleCosts {
 
     public static OrderedMap<UnitType, UnitData> units;
@@ -140,10 +139,6 @@ public class CastleCosts {
                 Items.tungsten, 1000,
                 Items.oxide, 1500,
                 Items.carbide, 1800
-        );
-
-        rules_Items = OrderedMap.of(
-
         );
     }
 

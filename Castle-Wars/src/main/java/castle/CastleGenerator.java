@@ -23,6 +23,7 @@ import static castle.CastleUtils.revealedUnits;
 import static castle.CastleUtils.shopFloor;
 import static castle.Main.*;
 import static mindustry.Vars.*;
+import castle.ShopRule.*;
 
 public class CastleGenerator {
     public static final int unitLimitX = 5, unitLimitY = 3, effectLimitX = 4;
