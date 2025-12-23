@@ -67,8 +67,8 @@ public class CastleUtils {
         landSpawnY = -1;
         airSpawnX = -1;
         airSpawnY = -1;
-        DefenseCap = 250;
-        AttackCap = 250;
+        DefenseCap = 150;
+        AttackCap = 350;
 
         for (var objective : state.rules.objectives.all) {
             if (objective instanceof FlagObjective flag) {
