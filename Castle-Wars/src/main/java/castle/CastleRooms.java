@@ -203,6 +203,8 @@ public class CastleRooms {
             else{System.out.println("Not Air");}
             if (type.naval && !tile.floor().isLiquid)
                 return false;
+            if (!type.flying && !type.naval && tile.floor().isLiquid)
+                return false;
             else{System.out.println("Is liquid");}
             return true;
         }
